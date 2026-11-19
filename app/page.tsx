@@ -36,7 +36,7 @@ export default function Home() {
       </div>
       <aside className="form-card" id="analysis" aria-labelledby="form-title">
         <div className="form-kicker">Your next stage of growth starts here</div>
-        <h2 id="form-title">Get your free<br />market growth plan.</h2>
+        <h2 id="form-title">Get your free <br />market growth plan.</h2>
         <p>A focused conversation about your market, your capacity, and your next move.</p>
         <form onSubmit={continueToBooking}>
           <label htmlFor="revenue">Annual company revenue
