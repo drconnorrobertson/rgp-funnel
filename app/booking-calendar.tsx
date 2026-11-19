@@ -9,7 +9,7 @@ export function BookingCalendar() {
    const details = JSON.parse(sessionStorage.getItem('rgp-booking') || '{}');
    const params = new URLSearchParams();
    for (const [field, query] of Object.entries({ firstName: 'first_name', lastName: 'last_name', email: 'email', phone: 'phone', company: 'company_name' })) {
-    if (typeof details[field] === 'string') params.set(query, details[field]);
+    if (typeof details[field] === 'string' && details[field].trim()) params.set(query, details[field]);
    }
    if (params.size) setUrl(`${calendarUrl}?${params}`);
   } catch { /* Booking remains available if storage is unavailable. */ }

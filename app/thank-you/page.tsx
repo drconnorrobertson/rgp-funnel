@@ -6,8 +6,7 @@ export default function ThankYou() {
     <main className="site-shell thank-you-page">
       <header className="topbar">
         <a className="brand" href="/" aria-label="Restoration Growth Partners home">
-          <span className="brand-mark" aria-hidden="true"><i /><i /><i /></span>
-          <span>RESTORATION <b>GROWTH PARTNERS</b></span>
+          <img src="/rgp-logo.png" alt="Restoration Growth Partners" width="238" height="96" />
         </a>
         <div className="step-indicator complete" aria-label="Step 2 of 2">
           <span><Check size={15} /></span><i /><span className="active">2</span>
@@ -16,9 +15,9 @@ export default function ThankYou() {
       </header>
 
       <section className="thanks-hero">
-        <div className="confirmation"><Check /> Step 2: schedule your analysis</div>
+        <div className="confirmation"><Check /> Choose your time</div>
         <h1>One last step: book your <span>strategy call.</span></h1>
-        <p>Your market analysis is the map. This 30-minute call turns it into a practical growth plan for your restoration company.</p>
+        <p>Choose a time below to review your market, growth opportunities, and next steps. Your free 30-minute call comes with no obligation.</p>
       </section>
 
       <section className="booking-layout">
@@ -30,7 +29,7 @@ export default function ThankYou() {
             <div><span><Clock3 /></span><p><strong>Your capacity gap</strong>We’ll compare your current lead flow with the work your team and equipment can realistically handle.</p></div>
             <div><span><ShieldCheck /></span><p><strong>Your path to owned growth</strong>We’ll outline a mix of immediate demand capture and long-term assets that compound over time.</p></div>
           </div>
-          <blockquote>“You don’t need another dashboard full of clicks. You need to know what goes in, what comes back out, and whether you can scale it profitably.”</blockquote>
+          <div className="call-prep"><strong>Bring your growth priorities.</strong><p>We’ll talk about your service area, available capacity, and what a profitable next stage could look like.</p></div>
         </div>
 
         <aside className="calendar-card" aria-labelledby="calendar-title">
@@ -44,7 +43,7 @@ export default function ThankYou() {
         </aside>
       </section>
 
-      <footer><span>© 2026 Restoration Growth Partners</span><a href="/">← Back to market analysis</a></footer>
+      <footer><span>© 2026 Restoration Growth Partners</span><a href="/">Back to growth plan</a></footer>
     </main>
   );
 }

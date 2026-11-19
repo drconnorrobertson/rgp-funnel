@@ -1,104 +1,73 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { ArrowRight, Check, CircleDollarSign, LockKeyhole, TrendingUp } from 'lucide-react';
-
-const proof = [
-  { value: '$30M+', label: 'client revenue generated in 2024' },
-  { value: '$115', label: 'reported average cost per job' },
-  { value: '1,500%', label: 'reported client ROI' },
-];
+import { useState } from 'react';
+import { Check, Clock3, ShieldCheck, TrendingUp } from 'lucide-react';
 
 export default function Home() {
   const router = useRouter();
+  const [continuing, setContinuing] = useState(false);
   function continueToBooking(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    if (continuing) return;
+    setContinuing(true);
     const data = new FormData(event.currentTarget);
-    try { sessionStorage.setItem('rgp-booking', JSON.stringify(Object.fromEntries(data.entries()))); } catch { /* Booking remains available without browser storage. */ }
+    try { sessionStorage.setItem('rgp-booking', JSON.stringify(Object.fromEntries(data.entries()))); } catch { /* The calendar works without browser storage. */ }
     router.push('/thank-you');
   }
-  return (
-    <main className="site-shell">
-      <header className="topbar">
-        <a className="brand" href="#top" aria-label="Restoration Growth Partners home">
-          <span className="brand-mark" aria-hidden="true"><i /><i /><i /></span>
-          <span>RESTORATION <b>GROWTH PARTNERS</b></span>
-        </a>
-        <div className="step-indicator" aria-label="Step 1 of 2">
-          <span className="active">1</span><i /><span>2</span>
-          <em>Market analysis</em>
-        </div>
-      </header>
-
-      <section className="hero" id="top">
-        <div className="hero-copy">
-          <div className="eyebrow"><TrendingUp size={16} /> For restoration companies doing $3M+ annually</div>
-          <h1>Your restoration company does $3M+. <span>How much more is Google sending to your competitors?</span></h1>
-          <p className="dek">Every month, property owners in your market search for emergency restoration help. If your company isn’t visible, the job doesn’t disappear—it goes to a competitor.</p>
-
-          <div className="leak-card">
-            <div className="leak-head">
-              <span>The invisible revenue leak</span>
-              <b>It never appears on your P&amp;L</b>
-            </div>
-            <div className="leak-flow" aria-label="Example of a missed restoration job">
-              <div><span>2:14 AM</span><strong>Basement floods</strong></div>
-              <ArrowRight />
-              <div><span>2:19 AM</span><strong>Homeowner searches</strong></div>
-              <ArrowRight />
-              <div className="lost"><span>Your competitor ranks first</span><strong>$8,000 job lost</strong></div>
-            </div>
-          </div>
-
-          <ul className="benefit-list">
-            <li><Check /> See the demand already happening in your market</li>
-            <li><Check /> Find the gap between your capacity and current lead flow</li>
-            <li><Check /> Get practical job and revenue projections—no vanity metrics</li>
-          </ul>
-        </div>
-
-        <aside className="form-card" aria-labelledby="form-title">
-          <div className="form-kicker"><CircleDollarSign size={18} /> Free lead projection analysis</div>
-          <h2 id="form-title">Find the revenue you may be missing.</h2>
-          <p>Tell us a little about your restoration business. We’ll map the opportunity in your market.</p>
-          <form onSubmit={continueToBooking}>
-            <div className="field-row">
-              <label>First name<input name="firstName" placeholder="Marcus" required /></label>
-              <label>Last name<input name="lastName" placeholder="Taylor" required /></label>
-            </div>
-            <label>Work email<input name="email" type="email" placeholder="marcus@company.com" required /></label>
-            <label>Phone number<input name="phone" type="tel" placeholder="(555) 123-4567" required /></label>
-            <label>Company name<input name="company" placeholder="Summit Restoration" required /></label>
-            <label>Annual company revenue
-              <select name="revenue" required defaultValue="">
-                <option value="" disabled>Select a range</option>
-                <option>$3M–$5M</option><option>$5M–$10M</option><option>$10M–$20M</option><option>$20M+</option>
-              </select>
-            </label>
-            <button type="submit" className="primary-button">Get my free market analysis</button>
-            <small><LockKeyhole size={13} /> Next: choose your call time. Details are sent when you book.</small>
-          </form>
-        </aside>
-      </section>
-
-      <section className="proof-strip" aria-label="Selected client results">
-        <p>Results over reports.</p>
-        {proof.map((item) => <div key={item.value}><strong>{item.value}</strong><span>{item.label}</span></div>)}
-        <small>*Selected client results. Individual results vary.</small>
-      </section>
-
-      <section className="argument">
-        <div>
-          <span className="section-label">The real question</span>
-          <h2>You built the trucks, team, equipment, and processes. <span>Is customer acquisition the bottleneck?</span></h2>
-        </div>
-        <div className="argument-copy">
-          <p>If your operation can handle another $50K, $100K, or $200K per month, weak lead flow is more than a marketing problem. It’s unused capacity.</p>
-          <p>We help restoration companies capture high-intent demand now while building rankings, reviews, and market authority they own long term—so growth doesn’t vanish the moment ad spend stops.</p>
-        </div>
-      </section>
-
-      <footer><span>© 2026 Restoration Growth Partners</span><span>Marketing built for the restoration industry.</span></footer>
-    </main>
-  );
+  return <main className="site-shell">
+    <header className="topbar">
+      <a className="brand" href="#top" aria-label="Restoration Growth Partners home"><img src="/rgp-logo.png" alt="Restoration Growth Partners" width="238" height="96" /></a>
+      <a className="header-cta" href="#analysis">Get my growth plan</a>
+    </header>
+    <section className="hero" id="top">
+      <div className="hero-copy">
+        <div className="eyebrow"><TrendingUp size={16} /> For restoration companies doing $3M+ a year</div>
+        <h1>Grow beyond $3M with <span>more profitable restoration jobs.</span></h1>
+        <p className="dek">Find out where your next jobs could come from—and what it will take to win them. Get a free, market-specific growth plan from a team focused exclusively on restoration.</p>
+        <ul className="benefit-list">
+          <li><Check /> See where competitors are winning your local searches</li>
+          <li><Check /> Identify opportunities that fit your team’s capacity</li>
+          <li><Check /> Review a lead projection, priorities, and timeline</li>
+        </ul>
+        <a href="#analysis" className="hero-cta primary-button">Get my free growth plan</a>
+        <p className="offer-note"><Clock3 size={16} /> 30-minute strategy call <span>•</span> No cost <span>•</span> No obligation</p>
+        <div className="proof-inline"><strong>$30M+</strong><span>Client revenue generated in 2024, as reported by RGP.</span></div>
+      </div>
+      <aside className="form-card" id="analysis" aria-labelledby="form-title">
+        <div className="form-kicker">Your next stage of growth starts here</div>
+        <h2 id="form-title">Get your free<br />market growth plan.</h2>
+        <p>A focused conversation about your market, your capacity, and your next move.</p>
+        <form onSubmit={continueToBooking}>
+          <label htmlFor="revenue">Annual company revenue
+            <select id="revenue" name="revenue" required defaultValue="">
+              <option value="" disabled>Select your annual revenue</option>
+              <option>$3M–$5M</option><option>$5M–$10M</option><option>$10M–$20M</option><option>$20M+</option>
+            </select>
+          </label>
+          <label htmlFor="company">Company name <span className="optional">(optional)</span><input id="company" name="company" placeholder="Your restoration company" autoComplete="organization" maxLength={160} /></label>
+          <button type="submit" className="primary-button" disabled={continuing}>{continuing ? 'Opening available times…' : 'Choose my call time'}</button>
+          <small><ShieldCheck size={16} /> No payment details. No commitment.</small>
+        </form>
+        <div className="next-step"><strong>What happens next?</strong><p>Choose an available time, then enter your contact details in our secure booking calendar.</p></div>
+      </aside>
+    </section>
+    <section className="results-section" aria-labelledby="results-title">
+      <div className="section-heading"><span className="section-label">Restoration businesses. Documented results.</span><h2 id="results-title">Built around revenue, not just rankings.</h2></div>
+      <div className="results-grid">
+        <article><span className="client-name">Romexterra Restoration</span><strong>$8.5M+</strong><p>Revenue generated in 2023 & 2024.</p><a href="https://www.restorationgrowthpartners.com/case-studies/romexterra-restoration" target="_blank" rel="noopener noreferrer">Read the case study</a></article>
+        <article><span className="client-name">Ercolano Cleaning & Restoration</span><strong>$12.5M+</strong><p>Revenue generated in 2023 & 2024.</p><a href="https://www.restorationgrowthpartners.com/case-studies/ercolano-cleaning-and-restoration" target="_blank" rel="noopener noreferrer">Read the case study</a></article>
+        <article><span className="client-name">Sunshine Restoration</span><strong>$500K+</strong><p>Revenue generated in 12 months.</p><a href="https://www.restorationgrowthpartners.com/case-studies/sunshine-restoration" target="_blank" rel="noopener noreferrer">Read the case study</a></article>
+      </div>
+      <p className="results-note">Selected results reported by Restoration Growth Partners. Different markets, budgets, and starting points produce different results. These are not guarantees.</p>
+    </section>
+    <section className="argument">
+      <div><span className="section-label">A plan for the business you’ve built</span><h2>You have the team.<br />Let’s find the <span>next growth opportunity.</span></h2></div>
+      <div className="argument-copy"><p>When trucks, equipment, and people are ready for more work, inconsistent lead flow holds the whole business back.</p><p>We’ll look at local demand, your Google presence, and your competition—then discuss a practical plan to generate more jobs and measure the revenue they bring in.</p><a href="#analysis" className="text-cta">Get my free growth plan</a></div>
+    </section>
+    <section className="faq-section"><h2>Before you book.</h2><details><summary>Who is this for?</summary><p>Owners and decision-makers at restoration companies generating at least $3 million annually, with the team and capacity to take on more work.</p></details><details><summary>What do we cover in the free call?</summary><p>Your service area, local competition, current marketing, and capacity. We’ll discuss your market opportunity, potential lead volume, and recommended next steps. Any projection is an estimate based on your situation.</p></details><details><summary>Will I need to commit to anything?</summary><p>No. The initial strategy call is free. If working together makes sense, you can review the scope, investment, and timeline before deciding.</p></details></section>
+    <section className="closing-cta"><h2>Know your market. Plan your next move.</h2><a href="#analysis" className="primary-button">Get my free growth plan</a><p>For established restoration companies doing $3M+ annually.</p></section>
+    <footer><span>© {new Date().getFullYear()} Restoration Growth Partners</span><span><a href="https://www.restorationgrowthpartners.com/" target="_blank" rel="noopener noreferrer">Main website</a><a href="https://restoration-growth-partners.vercel.app/privacy" target="_blank" rel="noopener noreferrer">Privacy</a></span></footer>
+    <div className="mobile-cta"><a href="#analysis" className="primary-button">Get my free growth plan</a></div>
+  </main>;
 }
