@@ -1,5 +1,22 @@
+import type { Metadata } from 'next';
 import { ArrowRight, CalendarDays, Check, Clock3, ShieldCheck, Users } from 'lucide-react';
 import { BookingCalendar } from '../booking-calendar';
+
+export const metadata: Metadata = {
+  title: 'Book Your Growth Strategy Call | RGP',
+  description: 'Choose a time for your Restoration Growth Partners strategy call.',
+  alternates: { canonical: '/thank-you' },
+  robots: { index: false, follow: true },
+  openGraph: {
+    type: 'website', siteName: 'Restoration Growth Partners', url: '/thank-you',
+    title: 'Book Your Growth Strategy Call | RGP',
+    description: 'Choose a time for your Restoration Growth Partners strategy call.',
+  },
+  twitter: {
+    card: 'summary', title: 'Book Your Growth Strategy Call | RGP',
+    description: 'Choose a time for your Restoration Growth Partners strategy call.',
+  },
+};
 
 export default function ThankYou() {
   return (
